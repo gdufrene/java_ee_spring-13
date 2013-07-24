@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-http-9.0.4.v20130625.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-io-9.0.4.v20130625.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-security-9.0.4.v20130625.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-server-9.0.4.v20130625.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-servlet-9.0.4.v20130625.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-util-9.0.4.v20130625.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/servlet-api-3.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
