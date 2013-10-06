@@ -11,10 +11,10 @@
 <body>
 <h1>Todo liste</h1>
 <%
-Task[] tasks = req.getAttribute("tasks");
+Task[] tasks = (Task[]) request.getAttribute("tasks");
 
 if ( tasks == null || tasks.length == 0 ) { %>
-Aucune tâche n'est enregistré.
+<i>Aucune tâche n'est enregistré</i>.<br/>
 <% } else { %>
 
 <%-- 
@@ -38,15 +38,22 @@ Aucune tâche n'est enregistré.
 <form name="" method="">
   <input type="hidden" name="action" value="">
   
+  <p>
   Titre :<br/>
-  <input type="" name="" value="">
+  <input type="" name="" value=""><br/>
+  </p>
   
-  Description :
+  <p>
+  Description :<br/>
   <textarea name=""></textarea>
+  </p>
   
-  Date Limite de réalisation :
+  <p>
+  Date Limite de réalisation :<br/>
   <input type="" name="" value=""></input>
+  </p>
   
+  <input type="submit" value="Créer la tâche"/>
 </form>
 
 </body>

@@ -21,12 +21,15 @@ Un jar est un jar lorsqu'il possède cette extension et qu'il contient un dossie
 contenant un ensemble d'information utile à l'exécution du code java (class) inclus également
 dans le fichier.
 
-Un fichier war EST un fichier jar contenant un fichier de description de l'application web
-et des différentes ressources qu'il utilise (dépendances ou publication de fichiers à travers
+Un fichier war EST un fichier jar contenant un fichier de description de l'application web ;
+il se trouve dans WEB-INF/web.xml.
+Il déclare éventuellement différentes ressources qu'il utilise (dépendances ou publication de fichiers à travers
 le serveur web). Un fichier permet par exemple de faire le lien entre une url appelée sur le
 serveur et la servlet à exécuter.
 
-# Une Application web de tâches à réaliser (TODO)
+# Une Application web de tâches à réaliser
+
+aka TODO List.
 
 Nous allons réaliser un war permettant d'exposer une application de "TODO" liste.
 Pour tester facilement ce war nous allons utiliser "jetty-runner". Jetty Runner est un
@@ -58,14 +61,35 @@ Placez le dans le répertoire "103_War" de ce projet.
 Si vous avez réalisé les TP précédant, il n'y a rien à faire, utilisez Eclipse en important le projet.
 
 
-## Comment compiler, créer le war et lancer l'application web ?
+## Compiler, créer le war, lancer l'application ?
+
+_Compiler_
 
 - Eclipse compile tout seul le code dans le répertoire "bin"
 - Il est possible de compiler le code avec le script fourni compile.sh
 - Pour les utilisateur windows, inspirez vous du script pour faire la même chose.
 
+_Créer le war_
 
-ou utilisez "makewar.sh", au choix.
+- Utiliser eclipse: Fichier Export, Java/jar, sélectionner les ressources (au moins www et WEB-INF), donner un nom au jar : "todo.war" ...
+- utilisez "makewar.sh", c'est au choix
+
+_Lancer l'application web_
+
+java -jar jetty-runner* todo.war
+
+Le "soucis" c'est que si vous faîtes une modification dans le fichier jsp, vous devez recompilez, refaire le war, et relancer le serveur...
+C'est pas cool.
+Pendant le développement on peut plutôt demander à jetty-runner de lancer le serveur en faisant comme si un répertoire était le contenu d'un war :
+
+java -jar jetty-runner* .
+
+(le répertoire . étant le répertoire courant).
+Dans ce dernier cas, lorsque vous modifiez le jsp, il est recompilé pour vous et vous voyez les modifications.
+Idem si vous aviez des ressources disponibles à travers le war (images, feuille de style, javascript ...)
+Par contre, il faut quand même re-compiler et relancer le serveur si vous modifier les classes java.
+D'où l'intérêt d'avoir bien testé avant avec du TDD :)
+
 
 ## Ecriture de notre application
 
@@ -83,6 +107,7 @@ Ils se trouvent dans le répertoire "test" et se lance
 - dans eclipse :
 clic droit sur "AllTests", "run as ...", "Junit Test"
 - à l'aide de la commande "run_test.sh"
+L'interface console est moins pratique mais rempli sa fonction ...
 
 Evidemment, pour le moment les tests ne passent pas.
 
