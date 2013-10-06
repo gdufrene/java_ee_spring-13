@@ -23,7 +23,7 @@ public class FormGreet extends HttpServlet {
 		out.write("<title>Hello Form Servlet</title>");
 		out.write("</head>");
 		out.write("<body>");
-		out.write("<form action='/form-greet' method='post'>");
+		out.write("<form action='/hello' method='post'>");
 		out.write("Votre nom : ");
 		out.write("<input type='text' name='name' width='40'/>");
 		out.write("<input type='submit' value='Ok'/>");
@@ -48,8 +48,7 @@ public class FormGreet extends HttpServlet {
 		out.write("</head>");
 		out.write("<body>");
 		
-		// TODO: Afficher Bonjour `name` !
-		out.write("<b>COMPLETE THIS CODE</b><br/>");
+		out.write("Hello <b>"+name+"</b><br/>");
 		
 		out.write("</body>");
 		out.write("</html>");
