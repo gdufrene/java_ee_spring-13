@@ -74,14 +74,24 @@ Cette fois ci curl envoie une requête 'POST' avec un contenu. Un seul paramètr
 Pour voir la requête executée et la réponse reçue :
 curl --trace-ascii - -d rayon=15.23 localhost:8080/circ
 - Relisez le code de la servlet Circonference
+- Complétez le code pour afficher réellement la circonférence d'un cercle
 
 ### Lire les paramètres d'une requête
 
-- Compléter la servlet FormGreet
+Généralement les servlets sont appelées depuis un navigateur, il convient donc d'y écrire du html qui pourra s'afficher dans celui-ci.
+
+- Compléter la méthode doGet de FormGreet :
+Ajouter un champ de saisi du nom dont le paramètre sera nommé "name"
+- Compléter la fonction doPost :
 La fonction javax.servlet.http.HttpServletRequest.getParameter permet de lire le contenu d'un paramètre GET ou POST d'une requête Http.
 Utilisez cette fonction dans la servlet FormGreet.doPost pour lire le paramètre "name" et écrire "Bonjour " + name + " !".
 La réponse doit être en html et le nom en gras. Si aucun nom n'est saisi, remplacer le nom par "world".
 - Essayer votre code
 Re-Lancer le serveur et rendez-vous sur localhost:8080/hello
-- Relisez le code de la servlet FormGreet et FormGreet2
+
+Plutôt que d'écrire du code html dans le code java, nous allons le mettre dans un fichier à pars pour faciliter son édition 
+(par exemple par un webdesigner) et pour faciliter sa mise à jour (pas besoin de recompiler ...)
+
+- Compléter la servlet FormGreet2 (qui étend FormGreet) :
+pour lire le contenu du fichier www/form.html et l'afficher dans la réponse http.
 
