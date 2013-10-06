@@ -23,9 +23,11 @@ public class FormGreet extends HttpServlet {
 		out.write("<title>Hello Form Servlet</title>");
 		out.write("</head>");
 		out.write("<body>");
-		out.write("<form action='/form-greet' method='post'>");
-		out.write("Votre nom : ");
-		out.write("<input type='text' name='name' width='40'/>");
+		out.write("<form action='/hello' method='post'>");
+		
+		// TODO: Ajouter un champ au formulaire pour saisir le nom.
+		// ...
+		
 		out.write("<input type='submit' value='Ok'/>");
 		out.write("</form>");
 		out.write("</body>");
@@ -38,7 +40,9 @@ public class FormGreet extends HttpServlet {
 		resp.setContentType("text/html");
 		resp.setCharacterEncoding("UTF-8");
 		
-		String name = req.getParameter("name");
+		// TODO: récupérer le bon paramètre pour le nom
+		String name = req.getParameter("XXXXXXXXXX");
+		// TODO: if name est null ou vide, lui affecter "world"
 		if ( name == null || name.isEmpty() ) name = "world";
 		
 		Writer out = resp.getWriter();
