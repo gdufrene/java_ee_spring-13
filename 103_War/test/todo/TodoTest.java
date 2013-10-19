@@ -116,7 +116,7 @@ public class TodoTest {
 		Task t = _createSampleTask();
 		list.addTask(t);
 		list.completeTask( 0xCAFE );
-		assertTrue( t.hasBeenCompleted() );
+		assertTrue( !t.hasBeenCompleted() );
 	}
 	
 }
