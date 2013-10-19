@@ -31,7 +31,7 @@ public class TestEtudiant {
 	private int saveEtudiant(String firstName, String lastName, int age) {
 		Etudiant etudiant = new Etudiant();
 		etudiant.setFirstname(firstName);
-		etudiant.setFirstname(lastName);
+		etudiant.setLastname(lastName);
 		etudiant.setAge(age);
 		etudiant.save(db);
 		return etudiant.getId();
@@ -41,7 +41,7 @@ public class TestEtudiant {
 	public void canSave() {
 		Etudiant etudiant = new Etudiant();
 		etudiant.setFirstname("Guillaume");
-		etudiant.setFirstname("Dufrne");
+		etudiant.setLastname("Dufrne");
 		etudiant.setAge(31);
 		
 		boolean saved = etudiant.save(db);
