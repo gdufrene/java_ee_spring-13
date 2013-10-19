@@ -56,7 +56,7 @@ public class TestEtudiant {
 		Etudiant etudiant = Etudiant.load(db, id);
 		
 		assertEquals("Guillaume", etudiant.getFirstname());
-		assertEquals("Dufrne", etudiant.getFirstname());
+		assertEquals("Dufrne", etudiant.getLastname());
 		assertEquals(31, etudiant.getAge());
 		assertEquals(id, etudiant.getId());
 	}
