@@ -14,36 +14,46 @@ package fr.eservice.todo;
  * @author guillaume
  */
 public class Task {
+	
+	private static int nextReference = 1;
+
+	private int reference;
+	private String 
+		title,
+		description;
+	private long
+		addedDate,
+		targetDate;
+	private boolean completed;
+	
+	public Task() {
+		addedDate = System.currentTimeMillis() / 1000L;
+		reference = nextReference++;
+	}
 
 	
 	public int getReference() {
-		// TODO Complete this code
-		return 0;
+		return reference;
 	}
 	
 	public String getTitle() {
-		// TODO Complete this code
-		return null;
+		return title;
 	}
 	
 	public String getDescription() {
-		// TODO Complete this code
-		return null;
+		return description;
 	}
 	
 	public long getAddedDate() {
-		// TODO Complete this code
-		return 0L;
+		return addedDate;
 	}
 	
 	public long getTargetDate() {
-		// TODO Complete this code
-		return 0L;
+		return targetDate;
 	}
 	
 	public boolean hasBeenCompleted() {
-		// TODO Complete this code
-		return true;
+		return completed;
 	}
 	
 	/**
@@ -60,7 +70,16 @@ public class Task {
 	public static Task create(String title, String description, Long target) 
 	throws ParameterException
 	{
-		return null;
+		Task task = new Task();
+		task.title = title;
+		task.description = description;
+		if ( target != null ) task.targetDate = target;
+		return task;
+	}
+
+
+	public void complete() {
+		this.completed = true;
 	}
 
 
