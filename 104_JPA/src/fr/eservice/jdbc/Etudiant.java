@@ -1,7 +1,6 @@
 package fr.eservice.jdbc;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,54 +13,26 @@ public class Etudiant {
 	private int age;
 	
 	public static Etudiant load( Connection db, int id ) {
-		Etudiant etudiant = null;
-		try {
-			PreparedStatement stm = db.prepareStatement(
-				"select id, nom, prenom, age from etudiant where id = ?"
-			);
-			stm.setInt(1, id);
-			ResultSet res = stm.executeQuery();
-			if ( !res.next() ) return null;
-			etudiant = new Etudiant();
-			etudiant.id = res.getInt(1);
-			etudiant.lastname = res.getString(2);
-			etudiant.firstname = res.getString(3);
-			etudiant.age = res.getInt(4);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.err.println("Unable to select etudiant");
-		}
-		return etudiant;
+		// TODO : Completer ce code pour sélection le bon étudiant dans la base.
+		
+		throw new Error("Complete this code");
 	}
 	
 	public boolean save( Connection db ) {
 		
-		try {
-			PreparedStatement insert = db.prepareStatement(
-				"insert into etudiant(nom, prenom, age) values(?, ?, ?)"
-			);
-			insert.setString(1, lastname);
-			insert.setString(2, firstname);
-			insert.setInt(3, age);
-			insert.execute();
-			insert.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.err.println("ERROR - impossible d'exécuter la requête insert etudiant.");
-		}
+		// TODO : Completer ce code pour sauvegarder le bon étudiant.
 		
 		// HINT: this code set the generated id.
 		try { 
 			Statement stm = db.createStatement();
 			ResultSet res = stm.executeQuery("call identity()");
 			if ( res.next() ) id = res.getInt(1);
+			stm.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
-			System.err.println("Unable to get ID.");
 			return false;
 		}
 		
-		return true;
+		throw new Error("Complete this code");
 	}
 	
 	public static Etudiant before(Connection db, int id) {
