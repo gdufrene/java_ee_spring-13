@@ -88,7 +88,7 @@ public class TodoTest {
 		TodoList list = new TodoList();
 		Task t = _createSampleTask();
 		list.addTask(t);
-		list.removeTask(t.getRefencene());
+		list.removeTask(t.getReference());
 		assertEquals(0, list.getTasks(ORDER.ADDED_DATE).length );
 	}
 	
@@ -106,7 +106,7 @@ public class TodoTest {
 		TodoList list = new TodoList();
 		Task t = _createSampleTask();
 		list.addTask(t);
-		list.completeTask(t.getRefencene());
+		list.completeTask(t.getReference());
 		assertTrue( t.hasBeenCompleted() );
 	}
 	

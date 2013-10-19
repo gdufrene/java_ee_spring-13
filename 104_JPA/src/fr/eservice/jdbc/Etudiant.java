@@ -1,7 +1,6 @@
 package fr.eservice.jdbc;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,68 +12,41 @@ public class Etudiant {
 	private String lastname;
 	private int age;
 	
-	private static Etudiant sqlLoad(Connection db, String comp, int id) {
-		Etudiant etudiant = null;
-		try {
-			PreparedStatement stm = db.prepareStatement(
-				"select TOP 1 id, nom, prenom, age from etudiant where id "+comp+" ?" +
-				("=".equals(comp) ? "" : " ORDER BY ID" + ("<".equals(comp) ? " DESC" : "") )
-			);
-			stm.setInt(1, id);
-			ResultSet res = stm.executeQuery();
-			if ( !res.next() ) return null;
-			etudiant = new Etudiant();
-			etudiant.id = res.getInt(1);
-			etudiant.lastname = res.getString(2);
-			etudiant.firstname = res.getString(3);
-			etudiant.age = res.getInt(4);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.err.println("Unable to select etudiant");
-		}
-		return etudiant;
-	}
-	
 	public static Etudiant load( Connection db, int id ) {
-		return sqlLoad(db, "=", id);
+		// TODO : Completer ce code pour sŽlection le bon Žtudiant dans la base.
+		
+		throw new Error("Complete this code");
 	}
 	
 	public boolean save( Connection db ) {
 		
-		try {
-			PreparedStatement insert = db.prepareStatement(
-				"insert into etudiant(nom, prenom, age) values(?, ?, ?)"
-			);
-			insert.setString(1, lastname);
-			insert.setString(2, firstname);
-			insert.setInt(3, age);
-			insert.execute();
-			insert.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.err.println("ERROR - impossible d'exŽcuter la requte insert etudiant.");
-		}
+		// TODO : Completer ce code pour sauvegarder le bon Žtudiant.
 		
 		// HINT: this code set the generated id.
 		try { 
 			Statement stm = db.createStatement();
 			ResultSet res = stm.executeQuery("call identity()");
 			if ( res.next() ) id = res.getInt(1);
+			stm.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
-			System.err.println("Unable to get ID.");
 			return false;
 		}
 		
-		return true;
+		throw new Error("Complete this code");
 	}
 	
 	public static Etudiant before(Connection db, int id) {
-		return sqlLoad(db, "<", id);
+		// TODO complete this code !
+		// SELECT TOP 1 ... FROM ... Where ... Order by ... 
+		
+		throw new Error("Complete this code");
 	}
 	
 	public static Etudiant after(Connection db, int id) {
-		return sqlLoad(db, ">", id);
+		// TODO Complete this code !
+		// SELECT TOP 1 ... FROM ... Where ... Order by ...
+		
+		throw new Error("Complete this code");
 	}
 	
 	/** Getters and setters ... */
