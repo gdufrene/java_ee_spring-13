@@ -3,6 +3,7 @@ package fr.eservice.jdbc;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,11 +15,13 @@ import fr.eservice.jdbc.VueEtudiant.FIELD;
 public class CtrlEtudiant {
 	
 	VueEtudiant view;
+	Connection db;
 	
 	public CtrlEtudiant( VueEtudiant view ) {
 		this.view = view;
 		
 		initHandlers();
+		db = Database.getInstance();
 	}
 	
 	private void error( String msg ) {
@@ -46,7 +49,7 @@ public class CtrlEtudiant {
 			String str_id = JOptionPane.showInputDialog(view, "Identifiant ?");
 			try {
 				int id = Integer.parseInt(str_id);
-				Etudiant etudiant = Etudiant.load(Database.getInstance(), id);
+				Etudiant etudiant = Etudiant.load(db, id);
 				if ( etudiant == null ) {
 					error("Aucun etudiant trouvé.");
 					return;
@@ -74,7 +77,7 @@ public class CtrlEtudiant {
 				return;
 			}
 			etudiant.setAge( age );
-			etudiant.save(Database.getInstance());
+			etudiant.save(db);
 			view.setField(FIELD.ID, ""+etudiant.getId());
 			info("Etudiant sauvegardé !");
 		}
@@ -91,7 +94,7 @@ public class CtrlEtudiant {
 				} catch (NumberFormatException e) {
 					doNext = true;
 				}
-				Etudiant etudiant = doNext ? Etudiant.after( id ) : Etudiant.before( id );
+				Etudiant etudiant = doNext ? Etudiant.after(db, id ) : Etudiant.before(db, id );
 				if ( etudiant != null ) {
 					setEtudiant(etudiant);
 					( doNext ? view.getPreviousButton() : view.getNextButton() ).setEnabled( true );
