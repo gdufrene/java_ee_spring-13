@@ -13,12 +13,11 @@ public class Etudiant {
 	private String lastname;
 	private int age;
 	
-	private static Etudiant sqlLoad(Connection db, String comp, int id) {
+	public static Etudiant load( Connection db, int id ) {
 		Etudiant etudiant = null;
 		try {
 			PreparedStatement stm = db.prepareStatement(
-				"select TOP 1 id, nom, prenom, age from etudiant where id "+comp+" ?" +
-				("=".equals(comp) ? "" : " ORDER BY ID" + ("<".equals(comp) ? " DESC" : "") )
+				"select id, nom, prenom, age from etudiant where id = ?"
 			);
 			stm.setInt(1, id);
 			ResultSet res = stm.executeQuery();
@@ -33,10 +32,6 @@ public class Etudiant {
 			System.err.println("Unable to select etudiant");
 		}
 		return etudiant;
-	}
-	
-	public static Etudiant load( Connection db, int id ) {
-		return sqlLoad(db, "=", id);
 	}
 	
 	public boolean save( Connection db ) {
@@ -70,11 +65,17 @@ public class Etudiant {
 	}
 	
 	public static Etudiant before(Connection db, int id) {
-		return sqlLoad(db, "<", id);
+		// TODO complete this code !
+		// SELECT TOP 1 ... FROM ... Where ... Order by ... 
+		
+		throw new Error("Complete this code");
 	}
 	
 	public static Etudiant after(Connection db, int id) {
-		return sqlLoad(db, ">", id);
+		// TODO Complete this code !
+		// SELECT TOP 1 ... FROM ... Where ... Order by ...
+		
+		throw new Error("Complete this code");
 	}
 	
 	/** Getters and setters ... */
