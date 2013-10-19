@@ -64,14 +64,14 @@ public class Etudiant {
 		return true;
 	}
 	
-	public static Etudiant before(int id) {
+	public static Etudiant before(Connection db, int id) {
 		// TODO complete this code !
 		// SELECT TOP 1 ... FROM ... Where ... Order by ... 
 		
 		throw new Error("Complete this code");
 	}
 	
-	public static Etudiant after(int id) {
+	public static Etudiant after(Connection db, int id) {
 		// TODO Complete this code !
 		// SELECT TOP 1 ... FROM ... Where ... Order by ...
 		

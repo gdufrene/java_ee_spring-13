@@ -82,10 +82,10 @@ public class TestEtudiant {
 		int[] ids = init_BeforeAfter();
 		Etudiant etudiant;
 		
-		etudiant = Etudiant.after( ids[0] );
+		etudiant = Etudiant.after(db, ids[0] );
 		assertEquals( "Dupond", etudiant.getLastname());
 		
-		etudiant = Etudiant.after( ids[1] );
+		etudiant = Etudiant.after(db, ids[1] );
 		assertEquals( "Martin", etudiant.getLastname());
 	}
 	
@@ -93,7 +93,7 @@ public class TestEtudiant {
 	public void testAfterLast() {
 		int[] ids = init_BeforeAfter();
 		Etudiant etudiant;
-		etudiant = Etudiant.after( ids[3] );
+		etudiant = Etudiant.after(db, ids[3] );
 		assertNull( etudiant );
 	}
 	
@@ -102,10 +102,10 @@ public class TestEtudiant {
 		int[] ids = init_BeforeAfter();
 		Etudiant etudiant;
 		
-		etudiant = Etudiant.before( ids[3] );
+		etudiant = Etudiant.before(db, ids[3] );
 		assertEquals( "Christophe", etudiant.getFirstname());
 		
-		etudiant = Etudiant.before( ids[1] );
+		etudiant = Etudiant.before(db, ids[1] );
 		assertEquals( "Guillaume", etudiant.getFirstname());
 	}
 
@@ -113,7 +113,7 @@ public class TestEtudiant {
 	public void testBeforeFirst() {
 		int[] ids = init_BeforeAfter();
 		Etudiant etudiant;
-		etudiant = Etudiant.before( ids[0] );
+		etudiant = Etudiant.before(db, ids[0] );
 		assertNull( etudiant );
 	}
 
