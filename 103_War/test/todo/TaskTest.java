@@ -26,10 +26,10 @@ public class TaskTest {
 	@Test
 	public void hasUniqueReference() {
 		Task t = new Task();
-		int id = t.getRefencene();
+		int id = t.getReference();
 		assertTrue( "Task must have a positive reference", id > 0 );
 		Task t2 = new Task();
-		assertNotSame("Task must have a unique reference", id, t2.getRefencene());
+		assertNotSame("Task must have a unique reference", id, t2.getReference());
 	}
 	
 	@Test

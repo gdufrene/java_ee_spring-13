@@ -16,7 +16,7 @@ package fr.eservice.todo;
 public class Task {
 
 	
-	public int getRefencene() {
+	public int getReference() {
 		// TODO Complete this code
 		return 0;
 	}
