@@ -8,6 +8,7 @@ import java.sql.Statement;
 public class Database {
 	
 	private static Database instance;
+	private static String connString = "jdbc:hsqldb:mem:mymemdb";
 	
 	private Connection db;
 	
@@ -17,17 +18,18 @@ public class Database {
 	}
 
 	private Connection getConnection() {
-		if ( db == null ) initConnection();
-		return db;
-	}
-
-	private Connection initConnection() {
+		
+		if ( db != null ) {
+			System.out.println( "return " + db );
+			return db;
+		}
 		try {
-			db = DriverManager.getConnection("jdbc:hsqldb:mem:mymemdb", "SA", "");
+			db = DriverManager.getConnection(connString, "SA", "");
 			createTables( db );
 		} catch (SQLException e) {
 			throw new Error( e );
 		}
+		System.out.println( "return " + db );
 		return db;
 	}
 
@@ -35,11 +37,12 @@ public class Database {
 		Statement stm = db.createStatement();
 		stm.execute(
 			"Create table etudiant(" +
-			"  id int GENERATED ALWAYS AS IDENTITY primary key," +
+			"  id int GENERATED ALWAYS AS IDENTITY(start with 1) primary key," +
 			"  nom varchar(80)," +
 			"  prenom varchar(80)," +
 			"  age int" + 
 			")"
 		);
+		stm.close();
 	}
 }
