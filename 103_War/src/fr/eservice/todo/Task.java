@@ -70,6 +70,12 @@ public class Task {
 	public static Task create(String title, String description, Long target) 
 	throws ParameterException
 	{
+		if ( title == null ) throw new ParameterException("title", "le titre doit être renseigné.");
+		title = title.trim();
+		if ( title.isEmpty() ) throw new ParameterException("title", "le titre doit être renseigné.");
+		
+		if ( description == null ) description = "";
+		
 		Task task = new Task();
 		task.title = title;
 		task.description = description;
