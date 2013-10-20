@@ -9,5 +9,5 @@ CP="bin"
 #done
 CP="$CP:$JETTY_DIR/lib/servlet-api-3.0.jar"
 
-test -d "bin" || mkdir "bin"
-javac -classpath "$CP" -sourcepath "src" -d "bin" "src/fr/eservice/todo/TodoServlet.java"
+test -d "WEB-INF/classes" || mkdir "WEB-INF/classes"
+javac -classpath "$CP" -sourcepath "src" -d "WEB-INF/classes" "src/fr/eservice/todo/TodoServlet.java"

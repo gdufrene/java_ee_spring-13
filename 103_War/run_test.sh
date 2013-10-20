@@ -17,12 +17,14 @@ if [ ! -f hamcrest-core-${HAMCREST_VERSION}.jar ] ; then
   || exit 2
 fi
 
-if [ ! -d bin/fr ] ; then
+if [ ! -d WEB-INF/classes/fr ] ; then
   echo "classes does not exists, compile first."
   exit 3
 fi
 
-CP="bin:junit-${JUNIT_VERSION}.jar:hamcrest-core-${HAMCREST_VERSION}.jar"
+CP="bin:WEB-INF/classes:junit-${JUNIT_VERSION}.jar:hamcrest-core-${HAMCREST_VERSION}.jar"
+
+test -d bin || mkdir bin
 
 #Compile Tests
 javac -classpath "$CP" -sourcepath src:test -d bin test/todo/AllTests.java
