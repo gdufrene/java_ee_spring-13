@@ -10,8 +10,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fr.eservice.common.Etudiant;
 import fr.eservice.jdbc.Database;
-import fr.eservice.jdbc.Etudiant;
 
 public class TestEtudiant {
 	

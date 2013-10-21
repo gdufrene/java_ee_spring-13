@@ -1,4 +1,4 @@
-package fr.eservice.jdbc;
+package fr.eservice.common;
 
 import java.awt.Color;
 import java.awt.Dimension;
