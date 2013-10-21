@@ -13,14 +13,14 @@ public class Etudiant {
 	private int age;
 	
 	public static Etudiant load( Connection db, int id ) {
-		// TODO : Completer ce code pour sŽlection le bon Žtudiant dans la base.
+		// TODO : Completer ce code pour sï¿½lection le bon ï¿½tudiant dans la base.
 		
 		throw new Error("Complete this code");
 	}
 	
 	public boolean save( Connection db ) {
 		
-		// TODO : Completer ce code pour sauvegarder le bon Žtudiant.
+		// TODO : Completer ce code pour sauvegarder le bon ï¿½tudiant.
 		
 		// HINT: this code set the generated id.
 		try { 
@@ -53,6 +53,10 @@ public class Etudiant {
 
 	public int getId() {
 		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getFirstname() {
