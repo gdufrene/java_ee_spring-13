@@ -3,25 +3,28 @@ package fr.eservice.jdbc;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import fr.eservice.jdbc.VueEtudiant.FIELD;
+import fr.eservice.common.Etudiant;
+import fr.eservice.common.EtudiantDao;
+import fr.eservice.common.VueEtudiant;
+import fr.eservice.common.VueEtudiant.FIELD;
 
 public class CtrlEtudiant {
 	
 	VueEtudiant view;
-	Connection db;
+	EtudiantDao daoEtudiant;
 	
-	public CtrlEtudiant( VueEtudiant view ) {
+	
+	public CtrlEtudiant( VueEtudiant view, EtudiantDao daoEtudiant ) {
 		this.view = view;
+		this.daoEtudiant = daoEtudiant;
 		
 		initHandlers();
-		db = Database.getInstance();
 	}
 	
 	private void error( String msg ) {
@@ -49,7 +52,7 @@ public class CtrlEtudiant {
 			String str_id = JOptionPane.showInputDialog(view, "Identifiant ?");
 			try {
 				int id = Integer.parseInt(str_id);
-				Etudiant etudiant = Etudiant.load(db, id);
+				Etudiant etudiant = daoEtudiant.load(id); //Etudiant.load(db, id);
 				if ( etudiant == null ) {
 					error("Aucun etudiant trouvé.");
 					return;
@@ -77,7 +80,8 @@ public class CtrlEtudiant {
 				return;
 			}
 			etudiant.setAge( age );
-			etudiant.save(db);
+			//etudiant.save(db);
+			daoEtudiant.save(etudiant);
 			view.setField(FIELD.ID, ""+etudiant.getId());
 			info("Etudiant sauvegardé !");
 		}
@@ -94,7 +98,8 @@ public class CtrlEtudiant {
 				} catch (NumberFormatException e) {
 					doNext = true;
 				}
-				Etudiant etudiant = doNext ? Etudiant.after(db, id ) : Etudiant.before(db, id );
+				// Etudiant etudiant = doNext ? Etudiant.after(db, id ) : Etudiant.before(db, id );
+				Etudiant etudiant = doNext ? daoEtudiant.after( id ) : daoEtudiant.before( id );
 				if ( etudiant != null ) {
 					setEtudiant(etudiant);
 					( doNext ? view.getPreviousButton() : view.getNextButton() ).setEnabled( true );
@@ -143,10 +148,13 @@ public class CtrlEtudiant {
 		});
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		VueEtudiant vueEtudiant = new VueEtudiant();
 		JFrame frame = vueEtudiant.showFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		new CtrlEtudiant(vueEtudiant);
+		
+		String daoImplementation = "fr.eservice.jdbc.EtudiantJdbcDao";
+		EtudiantDao dao = (EtudiantDao) Class.forName(daoImplementation).newInstance();
+		new CtrlEtudiant(vueEtudiant, dao);
 	}
 }

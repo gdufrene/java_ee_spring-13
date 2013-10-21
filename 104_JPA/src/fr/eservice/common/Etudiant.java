@@ -1,4 +1,4 @@
-package fr.eservice.jdbc;
+package fr.eservice.common;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
