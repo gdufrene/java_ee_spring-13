@@ -2,30 +2,28 @@ package jdbc;
 
 import static org.junit.Assert.*;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fr.eservice.common.Etudiant;
-import fr.eservice.jdbc.Database;
+import fr.eservice.common.EtudiantDao;
+import fr.eservice.jdbc.EtudiantJdbcDao;
 
 public class TestEtudiant {
 	
-	private static Connection db;
+	private static EtudiantDao dao;
 	
 	@BeforeClass
 	public static void initDB() {
-		db = Database.getInstance();
+		dao = new EtudiantJdbcDao();
 	}
 	
 	@Before
 	public void clearEtudiant() throws SQLException {
-		Statement stm = db.createStatement();
-		stm.execute("delete from etudiant");
+		dao.clear();
 	}
 	
 	private int saveEtudiant(String firstName, String lastName, int age) {
@@ -33,7 +31,7 @@ public class TestEtudiant {
 		etudiant.setFirstname(firstName);
 		etudiant.setLastname(lastName);
 		etudiant.setAge(age);
-		etudiant.save(db);
+		dao.save(etudiant);
 		return etudiant.getId();
 	}
 	
@@ -41,35 +39,35 @@ public class TestEtudiant {
 	public void canSave() {
 		Etudiant etudiant = new Etudiant();
 		etudiant.setFirstname("Guillaume");
-		etudiant.setLastname("Dufrne");
+		etudiant.setLastname("DufrÃªne");
 		etudiant.setAge(31);
 		
-		boolean saved = etudiant.save(db);
+		boolean saved = dao.save(etudiant);
 		
-		assertTrue( "Etudiant n'a pas t sauvegard ?", saved );
-		assertTrue( "Un identifiant doit tre plac", etudiant.getId() > 0 );
+		assertTrue( "Etudiant n'a pas Ã©tÃ© sauvegardÃ© ?", saved );
+		assertTrue( "Un identifiant doit Ãªtre placÃ©", etudiant.getId() > 0 );
 	}
 	
 	@Test
 	public void canLoad() {
-		int id = saveEtudiant("Guillaume", "Dufrne", 31);
-		Etudiant etudiant = Etudiant.load(db, id);
+		int id = saveEtudiant("Guillaume", "DufrÃªne", 31);
+		Etudiant etudiant = dao.load(id);
 		
 		assertEquals("Guillaume", etudiant.getFirstname());
-		assertEquals("Dufrne", etudiant.getLastname());
+		assertEquals("DufrÃªne", etudiant.getLastname());
 		assertEquals(31, etudiant.getAge());
 		assertEquals(id, etudiant.getId());
 	}
 	
 	@Test
 	public void loadNotFound() {
-		Etudiant etudiant = Etudiant.load(db, 0xCAFE);
-		assertNull("Doit retourner null lorsqu'il n'existe pas d'tudiant de cet ID", etudiant);
+		Etudiant etudiant = dao.load( 0xCAFE);
+		assertNull("Doit retourner null lorsqu'il n'existe pas d'Ã©tudiant de cet ID", etudiant);
 	}
 	
 	private int[] init_BeforeAfter() {
 		int[] ids = new int[] {
-			saveEtudiant("Guillaume",  "Dufrne", 31),
+			saveEtudiant("Guillaume",  "DufrÃªne", 31),
 			saveEtudiant("Jean",       "Dupond",  28),
 			saveEtudiant("Christophe", "Martin",  32),
 			saveEtudiant("Julien",     "Durand",  27)
@@ -82,10 +80,10 @@ public class TestEtudiant {
 		int[] ids = init_BeforeAfter();
 		Etudiant etudiant;
 		
-		etudiant = Etudiant.after(db, ids[0] );
+		etudiant = dao.after( ids[0] );
 		assertEquals( "Dupond", etudiant.getLastname());
 		
-		etudiant = Etudiant.after(db, ids[1] );
+		etudiant = dao.after( ids[1] );
 		assertEquals( "Martin", etudiant.getLastname());
 	}
 	
@@ -93,7 +91,7 @@ public class TestEtudiant {
 	public void testAfterLast() {
 		int[] ids = init_BeforeAfter();
 		Etudiant etudiant;
-		etudiant = Etudiant.after(db, ids[3] );
+		etudiant = dao.after( ids[3] );
 		assertNull( etudiant );
 	}
 	
@@ -102,10 +100,10 @@ public class TestEtudiant {
 		int[] ids = init_BeforeAfter();
 		Etudiant etudiant;
 		
-		etudiant = Etudiant.before(db, ids[3] );
+		etudiant = dao.before( ids[3] );
 		assertEquals( "Christophe", etudiant.getFirstname());
 		
-		etudiant = Etudiant.before(db, ids[1] );
+		etudiant = dao.before( ids[1] );
 		assertEquals( "Guillaume", etudiant.getFirstname());
 	}
 
@@ -113,7 +111,7 @@ public class TestEtudiant {
 	public void testBeforeFirst() {
 		int[] ids = init_BeforeAfter();
 		Etudiant etudiant;
-		etudiant = Etudiant.before(db, ids[0] );
+		etudiant = dao.before( ids[0] );
 		assertNull( etudiant );
 	}
 

@@ -26,7 +26,12 @@ public class EtudiantJPADao implements EtudiantDao {
 	}
 	
 	@Override
-	public void save(Etudiant etudiant) {
+	public boolean save(Etudiant etudiant) {
+		throw new Error("Not yet implemented");
+	}
+	
+	@Override
+	public void clear() {
 		throw new Error("Not yet implemented");
 	}
 	
