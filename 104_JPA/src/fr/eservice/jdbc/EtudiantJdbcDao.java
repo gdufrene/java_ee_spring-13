@@ -33,7 +33,13 @@ public class EtudiantJdbcDao implements EtudiantDao {
 	}
 	 
 	 @Override
-	public void save(Etudiant etudiant) {
+	public boolean save(Etudiant etudiant) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	 
+	@Override
+	public void clear() {
 		// TODO Auto-generated method stub
 		
 	}
