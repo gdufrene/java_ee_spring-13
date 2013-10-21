@@ -19,6 +19,7 @@ public class TestEtudiant {
 	@BeforeClass
 	public static void initDB() {
 		dao = new EtudiantJdbcDao();
+		dao.init();
 	}
 	
 	@Before
