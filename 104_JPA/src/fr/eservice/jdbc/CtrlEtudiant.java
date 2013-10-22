@@ -54,7 +54,7 @@ public class CtrlEtudiant {
 				int id = Integer.parseInt(str_id);
 				Etudiant etudiant = daoEtudiant.load(id); //Etudiant.load(db, id);
 				if ( etudiant == null ) {
-					error("Aucun etudiant trouvŽ.");
+					error("Aucun etudiant trouvï¿½.");
 					return;
 				}
 				setEtudiant(etudiant);
@@ -83,7 +83,7 @@ public class CtrlEtudiant {
 			//etudiant.save(db);
 			daoEtudiant.save(etudiant);
 			view.setField(FIELD.ID, ""+etudiant.getId());
-			info("Etudiant sauvegardŽ !");
+			info("Etudiant sauvegardï¿½ !");
 		}
 	};
 	
@@ -104,7 +104,7 @@ public class CtrlEtudiant {
 					setEtudiant(etudiant);
 					( doNext ? view.getPreviousButton() : view.getNextButton() ).setEnabled( true );
 				} else {
-					error( (doNext ? "Dernier " : "Premier ") + "Žtudiant !");
+					error( (doNext ? "Dernier " : "Premier ") + "ï¿½tudiant !");
 					( doNext ? view.getNextButton() : view.getPreviousButton() ).setEnabled( false );
 				}
 			}
@@ -153,8 +153,9 @@ public class CtrlEtudiant {
 		JFrame frame = vueEtudiant.showFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		String daoImplementation = "fr.eservice.jdbc.EtudiantJdbcDao";
+		String daoImplementation = "fr.eservice.jpa.EtudiantJPADao";
 		EtudiantDao dao = (EtudiantDao) Class.forName(daoImplementation).newInstance();
+		dao.init();
 		new CtrlEtudiant(vueEtudiant, dao);
 	}
 }

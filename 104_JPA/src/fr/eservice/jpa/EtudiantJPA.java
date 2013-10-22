@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 import fr.eservice.common.Etudiant;
 
-@Entity
+@Entity(name="etudiant")
 public class EtudiantJPA extends Etudiant {
 	
 	@Id
