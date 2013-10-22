@@ -17,31 +17,31 @@ public class EtudiantJdbcDao implements EtudiantDao {
 	@Override
 	public Etudiant after(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new Error("Not yet implemented");
 	}
 	
 	@Override
 	public Etudiant before(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new Error("Not yet implemented");
 	}
 	
 	@Override
 	public Etudiant load(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new Error("Not yet implemented");
 	}
 	 
 	 @Override
 	public boolean save(Etudiant etudiant) {
 		// TODO Auto-generated method stub
-		return false;
+		 throw new Error("Not yet implemented");
 	}
 	 
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		
+		throw new Error("Not yet implemented");
 	}
 
 }
