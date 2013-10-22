@@ -1,4 +1,4 @@
-package fr.eservice.jdbc;
+package fr.eservice.common;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -9,10 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import fr.eservice.common.Etudiant;
-import fr.eservice.common.EtudiantDao;
-import fr.eservice.common.VueEtudiant;
 import fr.eservice.common.VueEtudiant.FIELD;
+
 
 public class CtrlEtudiant {
 	
@@ -54,7 +52,7 @@ public class CtrlEtudiant {
 				int id = Integer.parseInt(str_id);
 				Etudiant etudiant = daoEtudiant.load(id); //Etudiant.load(db, id);
 				if ( etudiant == null ) {
-					error("Aucun etudiant trouv�.");
+					error("Aucun etudiant trouvé.");
 					return;
 				}
 				setEtudiant(etudiant);
@@ -83,7 +81,7 @@ public class CtrlEtudiant {
 			//etudiant.save(db);
 			daoEtudiant.save(etudiant);
 			view.setField(FIELD.ID, ""+etudiant.getId());
-			info("Etudiant sauvegard� !");
+			info("Etudiant sauvegardé !");
 		}
 	};
 	
@@ -104,7 +102,7 @@ public class CtrlEtudiant {
 					setEtudiant(etudiant);
 					( doNext ? view.getPreviousButton() : view.getNextButton() ).setEnabled( true );
 				} else {
-					error( (doNext ? "Dernier " : "Premier ") + "�tudiant !");
+					error( (doNext ? "Dernier " : "Premier ") + "étudiant !");
 					( doNext ? view.getNextButton() : view.getPreviousButton() ).setEnabled( false );
 				}
 			}
@@ -153,7 +151,12 @@ public class CtrlEtudiant {
 		JFrame frame = vueEtudiant.showFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		String daoImplementation = "fr.eservice.jpa.EtudiantJPADao";
+
+		String daoImplementation = "fr.eservice.jdbc.EtudiantJdbcDao";
+		if ( args != null && args.length > 1 ) {
+			daoImplementation = args[0];
+		}
+
 		EtudiantDao dao = (EtudiantDao) Class.forName(daoImplementation).newInstance();
 		dao.init();
 		new CtrlEtudiant(vueEtudiant, dao);
