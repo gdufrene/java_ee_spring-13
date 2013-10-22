@@ -1,4 +1,4 @@
-package jpa;
+package etudiant;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -7,7 +7,7 @@ import javax.persistence.Persistence;
 
 import fr.eservice.jpa.EtudiantJPA;
 
-public class DemoTest {
+public class DemoJPA {
 	
 	public static void main(String[] args) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("myapp");

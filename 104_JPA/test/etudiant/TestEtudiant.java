@@ -1,4 +1,4 @@
-package jdbc;
+package etudiant;
 
 import static org.junit.Assert.*;
 
