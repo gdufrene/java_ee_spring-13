@@ -54,6 +54,7 @@ public class CtrlEtudiant {
 					while ( next >  (current = System.currentTimeMillis()) ) {
 						Thread.sleep( next - current );
 					}
+					next = 0L;
 					component.setForeground(Color.GRAY);
 				} catch (InterruptedException e) {
 					return;

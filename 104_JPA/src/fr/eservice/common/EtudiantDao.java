@@ -3,43 +3,43 @@ package fr.eservice.common;
 public interface EtudiantDao {
 	
 	/**
-	 * Initialise la base de donn�es ou le moteur de persistance.
+	 * Initialise la base de données ou le moteur de persistance.
 	 */
 	public void init();
 	
 	/**
-	 * Recherche le premier �tudiant APRES un autre dont l'identifiant est donn�.
-	 * Renvoi null si il n'y a pas d'�tudiant apr�s.
+	 * Recherche le premier étudiant APRES un autre dont l'identifiant est donné.
+	 * Renvoi null si il n'y a pas d'étudiant après.
 	 * 
-	 * @param id l'identifiant de l'�tudiant � partir duquel lancer la recherche
+	 * @param id l'identifiant de l'étudiant à partir duquel lancer la recherche
 	 * @return Etudiant
 	 */
 	public Etudiant after( int id );
 	
 	/**
-	 * Recherche le premier �tudiant AVANT un autre dont l'identifiant est donn�.
-	 * Renvoi null si il n'y a pas d'�tudiant avant. 
+	 * Recherche le premier étudiant AVANT un autre dont l'identifiant est donné.
+	 * Renvoi null si il n'y a pas d'étudiant avant. 
 	 * 
-	 * @param id l'identifiant de l'�tudiant � partir duquel lancer la recherche
+	 * @param id l'identifiant de l'étudiant à partir duquel lancer la recherche
 	 * @return Etudiant
 	 */
 	public Etudiant before( int id );
 	
 	
 	/**
-	 * Sauvegarde un �tudiant pass� en param�tre.
-	 * Au moment de la sauvegarde le param�tre Id est affect�.
+	 * Sauvegarde un étudiant passé en paramètre.
+	 * Au moment de la sauvegarde le paramètre Id est affecté.
 	 * 
-	 * @param etudiant � sauvegarder
+	 * @param etudiant à sauvegarder
 	 * @return 
 	 */
 	public boolean save( Etudiant etudiant );
 	
 	/**
-	 * Charge un �tudiant dont l'identifiant est donn�.
+	 * Charge un étudiant dont l'identifiant est donné.
 	 * 
-	 * @param id identifiant de l'�tudiant � charger.
-	 * @return Etudiant, null si non trouv�.
+	 * @param id identifiant de l'étudiant à charger.
+	 * @return Etudiant, null si non trouvé.
 	 */
 	public Etudiant load( int id );
 
