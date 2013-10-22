@@ -4,9 +4,10 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
 import fr.eservice.common.VueEtudiant.FIELD;
@@ -26,15 +27,39 @@ public class CtrlEtudiant {
 	}
 	
 	private void error( String msg ) {
-		JLabel zone = view.getInfoZone();
+		JTextArea zone = view.getInfoZone();
 		zone.setText(msg);
 		zone.setForeground(Color.RED);
+		willResetColor(zone);
 	}
 	
 	private void info( String msg ) {
-		JLabel zone = view.getInfoZone();
+		JTextArea zone = view.getInfoZone();
 		zone.setText(msg);
 		zone.setForeground(Color.BLUE);
+		willResetColor(zone);
+	}
+	
+	private long next = 0L;
+	private void willResetColor(final JComponent component) {
+		boolean hasNext = ( next > 0 );
+		next = System.currentTimeMillis() + 2000L;
+		if ( hasNext ) return;
+		
+		new Thread( new Runnable() {
+			@Override
+			public void run() {
+				try {
+					long current;
+					while ( next >  (current = System.currentTimeMillis()) ) {
+						Thread.sleep( next - current );
+					}
+					component.setForeground(Color.GRAY);
+				} catch (InterruptedException e) {
+					return;
+				}
+			}
+		}).start();
 	}
 	
 	private void setEtudiant( Etudiant etudiant ) {

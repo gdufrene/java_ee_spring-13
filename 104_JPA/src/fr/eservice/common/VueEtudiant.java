@@ -1,16 +1,15 @@
 package fr.eservice.common;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.HashMap;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class VueEtudiant extends JPanel {
@@ -22,7 +21,7 @@ public class VueEtudiant extends JPanel {
 		WIDTH = 300,
 		HEIGHT = 450;
 	
-	private JLabel infoZone;
+	private JTextArea infoZone;
 	
 	private JButton
 		btn_search,
@@ -35,7 +34,7 @@ public class VueEtudiant extends JPanel {
 	
 	public enum FIELD {
 		ID, 
-		FIRSTNAME("prénom"), 
+		FIRSTNAME("pr√©nom"), 
 		LASTNAME("nom"), 
 		AGE;
 		
@@ -50,12 +49,17 @@ public class VueEtudiant extends JPanel {
 	
 	public VueEtudiant() {
 		super(true);
-		BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
-		setLayout( layout );
+		setLayout( null );
 		
-		infoZone = new JLabel();
-		infoZone.setPreferredSize( new Dimension(WIDTH, 100) );
+		int y = 5;
+		int h = 0;
+		int w = WIDTH - 10;
+		
+		infoZone = new JTextArea();
+		// infoZone.setPreferredSize( new Dimension(WIDTH, 100) );
+		infoZone.setEditable(false);
 		infoZone.setBackground(Color.WHITE);
+		infoZone.setBounds( 5, y, w, (h = 100) );
 		add( infoZone );
 		
 		JPanel top_buttons = new JPanel( new FlowLayout() );
@@ -63,10 +67,15 @@ public class VueEtudiant extends JPanel {
 		top_buttons.add( btn_create );
 		btn_search = new JButton("Rechercher ...");
 		top_buttons.add( btn_search );
+		y += h;
+		top_buttons.setBounds( 5, y, w, (h = 30) );
 		add( top_buttons );
 		
-		JPanel pFields = new JPanel( new GridLayout(0, 2) );
+		GridLayout fieldsLayout = new GridLayout(0, 2);
+		JPanel pFields = new JPanel( fieldsLayout );
 		
+		y += h;
+		h = 0;
 		for( FIELD field : FIELD.values() ) {
 			pFields.add( new JLabel(field.label) );
 			JTextField tf = new JTextField();
@@ -76,19 +85,26 @@ public class VueEtudiant extends JPanel {
 			}
 			textField.put(field, tf);
 			pFields.add( tf );
+			h += 30;
 		}
-		
+		pFields.setBounds( 5, y, w, h );
 		add(pFields);
 		
 		btn_save = new JButton("Sauvegarder");
+		y += h;
+		btn_save.setBounds( 5, y, w, (h = 30) );
 		add(btn_save);
 		
 		JPanel cursor_panel = new JPanel( new GridLayout(0, 2) );
-		btn_prev = new JButton("< Précédant");
+		btn_prev = new JButton("< Pr√©c√©dant");
 		cursor_panel.add(btn_prev);
 		btn_next = new JButton("Suivant >");
 		cursor_panel.add(btn_next);
+		y += h;
+		cursor_panel.setBounds( 5, y, w, (h = 30) );
 		add(cursor_panel);
+		
+		HEIGHT = y + h + 25;
 		
 	}
 	
@@ -106,6 +122,13 @@ public class VueEtudiant extends JPanel {
 		VueEtudiant vueEtudiant = new VueEtudiant();
 		JFrame frame = vueEtudiant.showFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		vueEtudiant.getInfoZone().setText(
+			"TEST ZONE INFO\n" +
+			"TEST ZONE INFO\n" +
+			"TEST ZONE INFO\n" +
+			"TEST ZONE INFO" 
+		);
 	}
 	
 	public void setField(FIELD id, String text) {
@@ -127,7 +150,7 @@ public class VueEtudiant extends JPanel {
 	
 	/** Getters / Setters **/
 	
-	public JLabel getInfoZone() {
+	public JTextArea getInfoZone() {
 		return infoZone;
 	}
 
