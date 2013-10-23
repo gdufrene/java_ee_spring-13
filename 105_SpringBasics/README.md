@@ -29,19 +29,19 @@ Télécharger et installer maven, utilisez install_maven.sh
 
 Ensuite, un ./mvn --version devrait vous donnez quelquechose du genre :
 
-'''
+<pre>
 Apache Maven 3.1.1 (0728685237757ffbf44136acec0402957f723d9a; 2013-09-17 17:22:22+0200)
 Maven home: /Users/guillaume/Dev/ens/java_ee_spring/105_SpringBasics/apache-maven-3.1.1
 Java version: 1.6.0_51, vendor: Apple Inc.
 Java home: /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
 Default locale: fr_FR, platform encoding: MacRoman
 OS name: "mac os x", version: "10.7.5", arch: "x86_64", family: "mac"
-'''
+</pre>
 
 Nous pouvons regarder la liste des dépendances de notre projet (ce qui les télécharge au besoin)
 ./mvn dependency:tree
 
-'''
+<pre>
 [INFO] fr.eservice:spring-basics:jar:1.0-SNAPSHOT
 [INFO] +- org.springframework:spring-context:jar:3.2.4.RELEASE:compile
 [INFO] |  +- org.springframework:spring-aop:jar:3.2.4.RELEASE:compile
@@ -51,7 +51,7 @@ Nous pouvons regarder la liste des dépendances de notre projet (ce qui les tél
 [INFO] |  |  \- commons-logging:commons-logging:jar:1.1.1:compile
 [INFO] |  \- org.springframework:spring-expression:jar:3.2.4.RELEASE:compile
 [INFO] \- junit:junit:jar:4.8.2:test
-'''
+</pre>
 
 Enfin, si vous comptez utiliser eclipse vous devrez configurer une variable "M2_REPO" désignant l'endroit
 où se trouvent les jar téléchargés par maven. Par défaut, ils se trouvent dans votre home, dans ".m2/repository"
