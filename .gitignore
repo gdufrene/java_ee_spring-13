@@ -6,3 +6,5 @@
 *.ear
 
 bin
+105_SpringBasics/apache-maven-3.1.1*
+105_SpringBasics/mvn
