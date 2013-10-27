@@ -12,4 +12,6 @@
   <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-expression/3.2.4.RELEASE/spring-expression-3.2.4.RELEASE.jar"/>
   <classpathentry kind="var" path="M2_REPO/junit/junit/4.8.2/junit-4.8.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/easymock/easymock/2.0/easymock-2.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-test/3.2.4.RELEASE/spring-test-3.2.4.RELEASE.jar"/>
 </classpath>

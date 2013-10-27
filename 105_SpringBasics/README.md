@@ -60,3 +60,16 @@ Passons à Spring.
 
 # L'injection de dépendances, IoC
 
+Nous souhaitons développer un logiciel permettant de contrôler un ascenseur.
+N'étant pas expert mécanique ou micro-logiciel, nous déléguons le développement des fonctions natives à une société externe. Afin d'être parfaitement d'accord avec le comportement et la forme de ces fonctions nous avons déterminé une interface (fr.eservice.common.Elevator). Ces opérations sont de "bas niveau", il convient de les manipuler avec précaution. Il ne faut pas, par exemple, demander à l'ascenseur de descendre alors qu'il est en train de monter. Il faut tout d'abord l'arrêter.
+
+Afin de contrôler l'ascenseur et sa position, la société responsable du développement natif nous a fourni une interface sur laquelle le matériel pourra nous notifier de différents événements. (fr.eservice.common.ElevatorListener)
+
+L'ascenseur pourra être livré avec un afficheur à placer à l'intérieur permettant d'indiquer aux usager si l'ascenseur monte ou descend et quel est l'étage atteint (fr.eservice.common.DisplayPanel)
+
+Développons notre logiciel pour contrôler les mouvements de l'ascenseur selon les désirs de nos utilisateurs. Ceux-ci veulent pouvoir appeler l'ascenseur, et une fois dans celui-ci, pouvoir lui demander d'aller à un autre étage. (fr.eservice.ElevatorUserInterface)
+
+Implémentez la classe fr.eservice.ElevatorSoftware, utilisez l'annotation @Component pour partager votre implémentation de `ElevatorUserInterface` dans le context. Utilisez l'annotation @Autowired pour injected une implémentation de `Elevator` disponible.
+
+Essayer de lancer les tests.
+
