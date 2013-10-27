@@ -2,15 +2,13 @@ package elevator;
 
 
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
+
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -19,69 +17,85 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.eservice.ElevatorSoftware;
 import fr.eservice.common.Elevator;
+import fr.eservice.common.ElevatorListener;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
+@Configuration
+@ContextConfiguration( classes={TestElevatorSoftware.class})
 @ComponentScan({"fr.eservice"})
 public class TestElevatorSoftware {
 	
+	@Autowired
 	private ElevatorSoftware software;
 	
-	private static Elevator elevator;
-	
 	@Autowired
-	private ApplicationContext context;
+	private Elevator elevator;
 	
-	@Configuration
-	static class Config {
-		@Bean
-		Elevator getElevator() {
-			System.out.println("get Elevator !!!");
-			return elevator;
-		}
-		@Bean
-		ElevatorSoftware software() {
-			return new ElevatorSoftware();
-		}
+	private int currentLevel;
+	
+	@Bean
+	public Elevator getElevator() {
+		return new Elevator() {
+			
+			ElevatorListener listener = software;
+			
+			@Override
+			public void up() {
+				currentLevel++;
+				if ( currentLevel > 5 ) throw new Error("Hit the roof");
+				listener.atFloor(currentLevel);
+			}
+			
+			@Override
+			public void start() {
+				
+			}
+			
+			@Override
+			public void stop() {
+
+			}
+			
+			@Override
+			public void openDoors() {
+				listener.doorOpened();
+			}
+			
+			@Override
+			public void down() {
+				currentLevel--;
+				if ( currentLevel < 1 ) throw new Error("Hit the ground");
+				listener.atFloor(currentLevel);
+			}
+			
+			@Override
+			public int currentFloorLevel() {
+				return currentLevel;
+			}
+			
+			@Override
+			public void closeDoors() {
+				listener.doorClosed();
+			}
+		};
 	}
 	
 	
 	@Test
 	public void testCallFloor() {
-		elevator = createMock( Elevator.class );
-		expect(elevator.currentFloorLevel())
-			.andReturn(1);
-		elevator.closeDoors();
-		elevator.up();
-		elevator.up();
-		elevator.up();
-		elevator.up();
-		elevator.stop();
-		elevator.openDoors();
-		replay( elevator );
-		
-		software = context.getBean( ElevatorSoftware.class );
+
+		currentLevel = 1;
 		software.callAt(5);
+		assertEquals(5, elevator.currentFloorLevel());
 		
-		verify( elevator );
 	}
 	
 	@Test
 	public void testWantGo() {
-		elevator = createMock( Elevator.class );
-		expect(elevator.currentFloorLevel()).andReturn(3);
-		elevator.closeDoors();
-		elevator.down();
-		elevator.down();
-		elevator.stop();
-		elevator.openDoors();
-		replay( elevator );
-		
-		software = context.getBean( ElevatorSoftware.class );
+		currentLevel = 3;
 		software.wantGo(1);
-		
-		verify( elevator );
+		assertEquals(1, elevator.currentFloorLevel());
 	}
 
 	

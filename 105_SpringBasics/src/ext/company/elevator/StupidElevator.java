@@ -1,5 +1,7 @@
 package ext.company.elevator;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,11 +40,12 @@ public class StupidElevator implements Elevator, Runnable {
 	boolean isOn = false;
 	
 	@Autowired
-	ElevatorListener listener;
+	List<ElevatorListener> listeners;
+	
+	Double xPosition = new Double(level);
+	Double doorPosition = 0d;
 	
 	public void run() {
-		Double xPosition = new Double(level);
-		Double doorPosition = 0d;
 		System.out.println("Elevator is now ON.");
 		isOn = true;
 		long lastTime = System.currentTimeMillis();
@@ -53,35 +56,47 @@ public class StupidElevator implements Elevator, Runnable {
 				Thread.sleep(100);
 				currentTime = System.currentTimeMillis();
 				diff = currentTime - lastTime;
-				
+				int compareLevel = level;
 				if ( movement == Movement.GOING_UP ) {
 					xPosition += verticalSpeed * diff / 1000;
 				}
-				if ( movement == Movement.GOING_UP ) {
+				if ( movement == Movement.GOING_DOWN ) {
 					xPosition -= verticalSpeed * diff / 1000;
+					compareLevel--;
 				}
-				if ( xPosition.intValue() != level ) {
-					xPosition = new Double(level);
-					listener.atFloor(level);
+				if ( movement != Movement.STOPPED ) {
+					for ( ElevatorListener listener : listeners ) listener.elevatorUpdatePosition(xPosition);
 				}
+				if ( xPosition.intValue() != compareLevel ) {
+					System.out.println("New position reach : " + xPosition);
+					level = (int) Math.round( xPosition );
+					xPosition = level / 1.0;
+					movement = Movement.STOPPED;
+					for ( ElevatorListener listener : listeners ) listener.atFloor(level);
+				}
+
 				
 				if ( doors == DoorTransition.WILL_OPEN ) {
 					doorPosition += doorSpeed * diff / 1000;
+					
+					if ( doorPosition >= 1.0 ) {
+						doorPosition = 1.0;
+						doors = DoorTransition.OPEN;
+						for ( ElevatorListener listener : listeners ) listener.doorOpened();
+					}
+					for ( ElevatorListener listener : listeners ) listener.doorUpdatePosition(doorPosition);
 				}
 				if ( doors == DoorTransition.WILL_CLOSE ) {
 					doorPosition -= doorSpeed * diff / 1000;
+					
+					if ( doorPosition <= 0.0 ) {
+						doorPosition = 0.0;
+						doors = DoorTransition.CLOSE;
+						for ( ElevatorListener listener : listeners ) listener.doorClosed();
+					}
+					for ( ElevatorListener listener : listeners ) listener.doorUpdatePosition(doorPosition);
 				}
-				if ( doorPosition.intValue() > 1 ) {
-					doorPosition = 1.0;
-					doors = DoorTransition.OPEN;
-					listener.doorOpened();
-				}
-				if ( doorPosition.intValue() < 0 ) {
-					doorPosition = 0.0;
-					doors = DoorTransition.CLOSE;
-					listener.doorClosed();
-				}
-				
+	
 				lastTime = currentTime;
 			}
 			System.out.println("Elevator is now OFF.");
@@ -92,16 +107,20 @@ public class StupidElevator implements Elevator, Runnable {
 	}
 	
 	public void start() {
+		System.out.println("Elevator:start()");
 		if ( isOn ) return;
 		new Thread( this ).start();
 	}
 	
 	public void stop() {
+		System.out.println("Elevator:stop()");
 		isOn = false;
+		System.out.println("Elevator is OFF");
 	}
 
 	@Override
 	public void up() {
+		System.out.println("Elevator:up()");
 		if ( movement == Movement.GOING_DOWN ) {
 			throw new Error( "Elevator broken. you asked going up whereas it's going down !" );
 		}
@@ -113,6 +132,7 @@ public class StupidElevator implements Elevator, Runnable {
 
 	@Override
 	public void down() {
+		System.out.println("Elevator:down()");
 		if ( movement == Movement.GOING_UP ) {
 			throw new Error( "Elevator broken. you asked going up whereas it's going up !" );
 		}
@@ -124,19 +144,21 @@ public class StupidElevator implements Elevator, Runnable {
 
 	@Override
 	public void openDoors() {
+		System.out.println("Elevator:openDoors()");
 		if ( movement != Movement.STOPPED ) {
 			throw new Error( "Elevator broken. you tried to openDoors where as the elevator is moving !" );
 		}
-		if ( doors == DoorTransition.OPEN ) return;
+		//if ( doors == DoorTransition.OPEN ) return;
 		doors = DoorTransition.WILL_OPEN;
 	}
 
 	@Override
 	public void closeDoors() {
+		System.out.println("Elevator:closeDoors()");
 		if ( movement != Movement.STOPPED ) {
 			throw new Error( "Elevator broken. you tried to openDoors where as the elevator is moving !" );
 		}
-		if ( doors == DoorTransition.OPEN ) return;
+		//if ( doors == DoorTransition.CLOSE ) return;
 		doors = DoorTransition.WILL_CLOSE;
 	}
 

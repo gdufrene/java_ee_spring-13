@@ -4,7 +4,8 @@ public abstract class DisplayPanel {
 
 	public enum Going {
 		DOWN,
-		UP
+		UP,
+		NONE
 	}
 	
 	public enum Level {

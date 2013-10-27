@@ -127,7 +127,7 @@ public class SwingDisplay extends DisplayPanel implements ElevatorListener {
 			public void paint(Graphics g) {
 				super.paint(g);
 				int width = getWidth();
-				int widthDoors = (int) (width / 2 * doorPos);
+				int widthDoors = (int) (width / 2 * (1.0 - doorPos));
 				if ( widthDoors < 10 ) widthDoors = 10;
 				int height = getHeight();
 				g.setColor(Color.WHITE);
@@ -208,7 +208,7 @@ public class SwingDisplay extends DisplayPanel implements ElevatorListener {
 	
 	@Override
 	public void atFloor(int floor) {
-		if ( floor < 0 || floor > Level.values().length - 2) return;
+		if ( floor < 1 || floor > Level.values().length) return;
 		Level level = Level.values()[floor - 1];
 		setCurrentLevel(level);
 	}

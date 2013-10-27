@@ -19,6 +19,12 @@ public interface Elevator {
 	
 	
 	/**
+	 * Start the elevator. (continue previous action)
+	 */
+	public void start();
+	
+	
+	/**
 	 * Stop the elevator at the current location.
 	 */
 	public void stop();

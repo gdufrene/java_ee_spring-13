@@ -32,6 +32,7 @@ public class ControlPanel {
 	
 	
 	public void push( Button b ) {
+		System.out.println("Control panel push " + b.name());
 		listener.buttonPushed(b);
 	}
 	
