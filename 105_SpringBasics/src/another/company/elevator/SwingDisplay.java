@@ -182,12 +182,13 @@ public class SwingDisplay extends DisplayPanel implements ElevatorListener {
 		callButtonsPanel = new JPanel( new GridLayout(0, 1) );
 		Dimension callButtonDimension = new Dimension(20, 20);
 		for (int i = 0; i < 5; i++) {
-			final int levelButton = i + 1;
+			final int levelButton = 5 - i;
 			JButton b = new JButton( "(*)" );
 			b.setPreferredSize(callButtonDimension);
 			b.addActionListener( new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					System.out.println("Call elevator at " + levelButton);
 					if ( controlPanel == null ) return;
 					controlPanel.pushCallButton(levelButton);
 				}
