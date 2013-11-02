@@ -1,7 +1,6 @@
 package fr.eservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import fr.eservice.common.DisplayPanel;
@@ -17,7 +16,6 @@ public class ElevatorSoftware implements ElevatorListener, ElevatorUserInterface
 	private Elevator elevator;
 	
 	@Autowired
-	@Qualifier("graphic")
 	private DisplayPanel panel;
 	
 	private int targetFloor = -1;
@@ -90,16 +88,10 @@ public class ElevatorSoftware implements ElevatorListener, ElevatorUserInterface
 	}
 
 	@Override
-	public void doorUpdatePosition(double x) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void doorUpdatePosition(double x) { }
 
 	@Override
-	public void elevatorUpdatePosition(double x) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void elevatorUpdatePosition(double x) { }
 	
 	boolean started = false;
 	

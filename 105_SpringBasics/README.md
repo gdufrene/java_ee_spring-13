@@ -72,4 +72,11 @@ Développons notre logiciel pour contrôler les mouvements de l'ascenseur selon 
 Implémentez la classe fr.eservice.ElevatorSoftware, utilisez l'annotation @Component pour partager votre implémentation de `ElevatorUserInterface` dans le context. Utilisez l'annotation @Autowired pour injecter une implémentation de `Elevator` disponible.
 
 Essayer de lancer les tests.
+(via eclipse ou mvn test)
+
+Si vos tests passent vous devriez pouvoir utiliser AppElevator.
+Notez l'utilisation de `AnnotationConfigApplicationContext` pour créer les objets et les injecter dans le contexte spring.
+l'annotation @ComponentScan sert à définir quel sera la portée des paquetages pour lesquels prendre en compte les annotations de nos composants.
+
+Lancer l'application avec Eclipse ou Maven (mvn exec:java)
 

@@ -1,8 +1,5 @@
 package ext.company.elevator;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,8 +26,6 @@ public class ControlPanel {
 			this.label = label;
 		}
 	}
-	
-	Set<Button> lightsOn = new HashSet<ControlPanel.Button>(Button.values().length);
 	
 	public void push( Button b ) {
 		System.out.println("Control panel push " + b.name());
@@ -64,15 +59,5 @@ public class ControlPanel {
 		userControl.callAt(level);
 	}
 	
-	public void setLight( Button b, boolean on ) {
-		boolean changed = ( on ? lightsOn.add(b) : lightsOn.remove(b) );
-		if ( changed ) {
-			// listener.lightsChanged();
-		}
-	}
-	
-	public Button[] getLightsOn( ) {
-		return lightsOn.toArray( new Button[]{} );
-	}
 
 }

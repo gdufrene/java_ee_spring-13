@@ -1,4 +1,4 @@
-package ext.company.elevator;
+package elevator;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ public class ConsolePanel extends DisplayPanel {
 
 	@Override
 	public void setCurrentLevel(Level level) {
-		System.out.println("You are now on" + level.name + " floor.");
+		System.out.println("You are now on " + level.name());
 	}
 	
 	@Override
