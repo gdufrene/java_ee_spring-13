@@ -16,7 +16,22 @@
     <testOutputDirectory>bin</testOutputDirectory>
     <sourceDirectory>src</sourceDirectory>
     <testSourceDirectory>test</testSourceDirectory>
+    
+    <plugins>
+      <plugin>
+		  <groupId>org.codehaus.mojo</groupId>
+		  <artifactId>exec-maven-plugin</artifactId>
+		  <version>1.1</version>
+		  <configuration>
+		    <mainClass>fr.eservice.AppElevator</mainClass>
+		  </configuration>
+	  </plugin>
+    </plugins>
   </build>
+  
+	
+
+  
   
   <dependencies>
     <!-- Running dependencies -->

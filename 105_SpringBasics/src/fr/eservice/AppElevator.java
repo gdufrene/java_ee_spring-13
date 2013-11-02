@@ -19,7 +19,7 @@ public class AppElevator {
 	ApplicationContext context;
 
 	
-	public void start() {
+	public void runApplication() {
 		software.init();
 		System.out.println("Application started.");
 	}
@@ -28,7 +28,7 @@ public class AppElevator {
 		AnnotationConfigApplicationContext context =  new AnnotationConfigApplicationContext(AppElevator.class) ;
 
 		AppElevator application = context.getBean(AppElevator.class);
-		application.start();
+		application.runApplication();
 	}	
 
 }
