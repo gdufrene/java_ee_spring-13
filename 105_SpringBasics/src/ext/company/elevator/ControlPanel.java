@@ -6,40 +6,68 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import fr.eservice.ElevatorUserInterface;
+
 @Component
 public class ControlPanel {
 	
-	public interface ControlPanelListener {
-		public void buttonPushed( Button b );
-		public void lightsChanged( );
-	}
-	
 	@Autowired
-	private ControlPanelListener listener;
+	private ElevatorUserInterface userControl;
 	
 	public enum Button {
-		KEEP_OPEN,
-		LEVEL_1,
-		LEVEL_2,
-		LEVEL_3,
-		LEVEL_4,
-		LEVEL_5,
-		ALARM,
-		STOP
+		KEEP_OPEN("<>"),
+		LEVEL_1("RdC"),
+		LEVEL_2("1"),
+		LEVEL_3("2"),
+		LEVEL_4("3"),
+		LEVEL_5("4"),
+		ALARM("/!\\"),
+		STOP("[X]");
+		
+		public String label;
+		private Button(String label) {
+			this.label = label;
+		}
 	}
 	
 	Set<Button> lightsOn = new HashSet<ControlPanel.Button>(Button.values().length);
 	
-	
 	public void push( Button b ) {
 		System.out.println("Control panel push " + b.name());
-		listener.buttonPushed(b);
+		if ( userControl == null ) return;
+		switch (b) {
+		case LEVEL_1:
+		case LEVEL_2:
+		case LEVEL_3:
+		case LEVEL_4:
+		case LEVEL_5:
+			int level = 0;
+			String name = b.name();
+			if ( !name.startsWith("LEVEL_") ) return;
+			try {
+				level = Integer.parseInt( name.substring(6) );
+			} catch (NumberFormatException e) {
+				return;
+			}
+			userControl.wantGo(level);
+			break;
+		case ALARM:
+			userControl.alarm();
+		default:
+		case STOP:
+			userControl.stop();
+			break;
+		}
+	}
+	
+	public void pushCallButton( int level ) {
+		userControl.callAt(level);
 	}
 	
 	public void setLight( Button b, boolean on ) {
 		boolean changed = ( on ? lightsOn.add(b) : lightsOn.remove(b) );
 		if ( changed ) {
-			listener.lightsChanged();
+			// listener.lightsChanged();
 		}
 	}
 	
