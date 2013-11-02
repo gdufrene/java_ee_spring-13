@@ -9,11 +9,11 @@ public abstract class DisplayPanel {
 	}
 	
 	public enum Level {
-		LEVEL_1("1st"),
-		LEVEL_2("2nd"),
-		LEVEL_3("3rd"),
-		LEVEL_4("4th"),
-		LEVEL_5("5th");
+		LEVEL_1("RdC"),
+		LEVEL_2("1er"),
+		LEVEL_3("2e"),
+		LEVEL_4("3e"),
+		LEVEL_5("4e");
 		
 		public String name;
 		
