@@ -30,12 +30,7 @@ public class TestElevatorSoftware {
 	@Autowired
 	private Elevator elevator;
 	
-	private int currentLevel = 1;
-	
-	@Before
-	public void init() {
-		currentLevel = 1;
-	}
+	private static int currentLevel = 1;
 	
 	@Bean 
 	public DisplayPanel getDisplayPanel() {
@@ -45,6 +40,23 @@ public class TestElevatorSoftware {
 	@Bean 
 	public ElevatorSoftware getElevatorSoftware() {
 		return new ElevatorSoftware();
+	}
+	
+	
+	private static boolean 
+		openDoorWhenGoUp = false,
+		betweenFloors = false;
+	
+	@Before
+	public void init() {
+		System.out.println(  " ***** BEFORE ***** "  );
+		currentLevel = 1;
+		openDoorWhenGoUp = false;
+		betweenFloors = false;
+		
+		software.init();
+		
+		System.out.println("level " + elevator.currentFloorLevel() );
 	}
 	
 	@Bean
@@ -59,8 +71,15 @@ public class TestElevatorSoftware {
 			public void up() {
 				if ( !started ) throw new Error("Elevator not started !");
 				if ( !doorClosed ) throw new Error("Doors open !");
+				
+				if ( openDoorWhenGoUp ) {
+					betweenFloors = true;
+					software.keepOpen();
+				}
+				
 				currentLevel++;
 				if ( currentLevel > 5 ) throw new Error("Hit the roof");
+				betweenFloors = false;
 				listener.atFloor(currentLevel);
 			}
 			
@@ -70,6 +89,7 @@ public class TestElevatorSoftware {
 				if ( !doorClosed ) throw new Error("Doors open !");
 				currentLevel--;
 				if ( currentLevel < 1 ) throw new Error("Hit the ground");
+				betweenFloors = false;
 				listener.atFloor(currentLevel);
 			}
 			
@@ -85,6 +105,7 @@ public class TestElevatorSoftware {
 				listener.doorClosed(); 
 			}
 			@Override public void openDoors() {
+				if ( betweenFloors ) throw new Error("Can't open doors between floor !!");
 				doorClosed = false;
 				listener.doorOpened(); 
 			}
@@ -95,10 +116,16 @@ public class TestElevatorSoftware {
 	
 	@Test
 	public void testCallFloor() {
-		currentLevel = 1;
-		software.init();
 		software.callAt(5);
 		assertEquals(5, elevator.currentFloorLevel());
+	}
+	
+	@Test
+	public void testCallFloorInvalid() {
+		currentLevel = 1;
+		// would ignore call
+		software.callAt(6);
+		assertEquals(1, elevator.currentFloorLevel());
 	}
 	
 	@Test
@@ -108,7 +135,21 @@ public class TestElevatorSoftware {
 		software.wantGo(1);
 		assertEquals(1, elevator.currentFloorLevel());
 	}
-
 	
+	@Test
+	public void testWantGoInvalid() {
+		// would ignore call
+		software.wantGo(6);
+		assertEquals(1, elevator.currentFloorLevel());
+	}
+
+	@Test
+	public void testRequestOpenWhileMoving() {
+		currentLevel = 2;
+		software.init();
+		openDoorWhenGoUp = true;
+		software.wantGo(3);
+		assertEquals(3, elevator.currentFloorLevel());
+	}
 
 }
