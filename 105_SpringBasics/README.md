@@ -69,7 +69,7 @@ L'ascenseur pourra être livré avec un afficheur à placer à l'intérieur perm
 
 Développons notre logiciel pour contrôler les mouvements de l'ascenseur selon les désirs de nos utilisateurs. Ceux-ci veulent pouvoir appeler l'ascenseur, et une fois dans celui-ci, pouvoir lui demander d'aller à un autre étage. (fr.eservice.ElevatorUserInterface)
 
-Implémentez la classe fr.eservice.ElevatorSoftware, utilisez l'annotation @Component pour partager votre implémentation de `ElevatorUserInterface` dans le context. Utilisez l'annotation @Autowired pour injected une implémentation de `Elevator` disponible.
+Implémentez la classe fr.eservice.ElevatorSoftware, utilisez l'annotation @Component pour partager votre implémentation de `ElevatorUserInterface` dans le context. Utilisez l'annotation @Autowired pour injecter une implémentation de `Elevator` disponible.
 
 Essayer de lancer les tests.
 

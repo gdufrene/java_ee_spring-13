@@ -41,7 +41,11 @@ public class SwingDisplay extends DisplayPanel implements ElevatorListener {
 		mainPanel.add( buildElevatorDisplayPanel(), BorderLayout.NORTH );
 		mainPanel.add( buildElevatorButtonsPanel(), BorderLayout.WEST );
 		mainPanel.add( buildDoorPanel(), BorderLayout.CENTER );
-		mainPanel.add( buildElevatorPositionPanel(), BorderLayout.EAST );
+		
+		JPanel eastPanel = new JPanel( new GridLayout(0,2) );
+		eastPanel.add( buildElevatorPositionPanel() );
+		eastPanel.add( builCallButtonsPanel() );
+		mainPanel.add( eastPanel, BorderLayout.EAST );
 		
 		JFrame frame = new JFrame("Elevator application");
 		
@@ -54,7 +58,7 @@ public class SwingDisplay extends DisplayPanel implements ElevatorListener {
 	JPanel elevatorButtonsPanel;
 	private JPanel buildElevatorButtonsPanel() {
 		if ( elevatorButtonsPanel != null ) return elevatorButtonsPanel;
-		elevatorButtonsPanel = new JPanel( new GridLayout(0,1) );
+		elevatorButtonsPanel = new JPanel( new GridLayout(0,2) );
 		Button[] buttons = Button.values();
 		for(int i = 0; i < buttons.length / 2; i++) {
 			Button b = buttons[i];
@@ -62,31 +66,32 @@ public class SwingDisplay extends DisplayPanel implements ElevatorListener {
 			buttons[ buttons.length - i - 1 ] = b;
 		}
 		for ( Button b : buttons ) {
-			JButton jb = createButton(b.name());
+			JButton jb = createButton(b);
 			elevatorButtonsPanel.add( jb );
 		}
 		return elevatorButtonsPanel;
 	}
 	
-	private Dimension buttonDimension = new Dimension(80, 40);
-	private HashMap<String, JButton> buttons = new HashMap<String, JButton>();
-	private JButton createButton(String name) {
-		JButton button = new JButton(name);
+	private Dimension buttonDimension = new Dimension(40, 40);
+	private JButton createButton(Button btn) {
+		JButton button = new JButton(btn.label);
 		button.setPreferredSize(buttonDimension);
-		button.setOpaque(true);
+		// button.setBorderPainted(false);
+		// button.setOpaque(true);
 		offStyle(button);
-		button.addActionListener( buttonListener );
-		buttons.put( name, button );
+		button.addActionListener( new ButtonListener(btn) );
 		return button;
 	}
-	private ActionListener buttonListener = new ActionListener() {
+	private class ButtonListener implements ActionListener {
+		private  Button btn;
+		public ButtonListener(Button btn) {
+			this.btn = btn;
+		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if ( !(e.getSource() instanceof JButton) ) return;
-			JButton button = (JButton) e.getSource();
-			System.out.println( "you pushed " + button.getText() );
+			System.out.println( "you pushed " + btn.name() );
 			if ( controlPanel == null ) return;
-			controlPanel.push( Button.valueOf(button.getText().toUpperCase()) );
+			controlPanel.push( btn );
 		}
 	};
 	
@@ -169,6 +174,27 @@ public class SwingDisplay extends DisplayPanel implements ElevatorListener {
 			}
 		};
 		return elevatorPositionPanel;
+	}
+	
+	private JPanel callButtonsPanel;
+	private JPanel builCallButtonsPanel() {
+		if ( callButtonsPanel != null ) return callButtonsPanel;
+		callButtonsPanel = new JPanel( new GridLayout(0, 1) );
+		Dimension callButtonDimension = new Dimension(20, 20);
+		for (int i = 0; i < 5; i++) {
+			final int levelButton = i + 1;
+			JButton b = new JButton( "(*)" );
+			b.setPreferredSize(callButtonDimension);
+			b.addActionListener( new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if ( controlPanel == null ) return;
+					controlPanel.pushCallButton(levelButton);
+				}
+			});
+			callButtonsPanel.add( b );
+		}
+		return callButtonsPanel;
 	}
 
 
