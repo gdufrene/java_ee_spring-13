@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<!--
+  Google HTML5 slide template
+
+  Authors: Luke Mahé (code)
+           Marcin Wichary (code and design)
+           
+           Dominic Mazzoni (browser compatibility)
+           Charles Chen (ChromeVox support)
+
+  URL: http://code.google.com/p/html5slides/
+-->
+
+<!--
+  Java EE - Spring Course.
+  Master e-service - Guillaume Dufrêne - 2013
+-->
+
+<html>
+  <head>
+    <title>Java EE / Spring</title>
+
+    <meta charset='utf-8'>
+    <script
+      src='http://html5slides.googlecode.com/svn/trunk/slides.js'></script>
+  </head>
+  
+  <style>
+    .icon-github {
+      height: 32px;
+      width: 32px;
+      display: inline-block;
+      position: relative;
+      top: 8px;
+      border-radius: 5px;
+      background: transparent url('https://github.com/apple-touch-icon-114.png') scroll no-repeat left center; 
+      background-size: 32px 32px;
+    }
+    ul.two-cols li {
+      float: left;
+      width: 48%;
+    }
+    .slides.template-lille1 article.biglogo {
+      background: #FFFFFF url('http://www.univ-lille1.fr/images/lille1/commun/logo.jpg') scroll no-repeat 50% 50%;
+    }
+    .slides.template-lille1 article {
+      background: #FFFFFF url('http://www.univ-lille1.fr/images/lille1/commun/logo.jpg') scroll no-repeat right bottom;
+    }
+    .slides.template-lille1 a {
+      text-decoration: none;
+    }
+    .slides.template-lille1 a:hover {
+      color: #A00;
+    }
+  </style>
+
+  <body style='display: none'>
+
+    <section class='slides layout-regular template-lille1'>
+      
+      <!-- Your slides (<article>s) go here. Delete or comment out the
+           slides below. -->
+
+      <article class='biglogo'>
+      </article>
+
+      <article>
+        <h1>
+          Java EE - Spring
+        </h1>
+        <p>
+          Guillaume Dufrêne
+          <br>
+          Master e-services - 2013
+        </p>
+        <p style="font-size: 0.8em">
+          guillaume.dufrene@webpulser.com <br/>
+          <a href="https://github.com/gdufrene/java_ee_spring"> <i class="icon-github"></i> gdufrene/java_ee_spring </a>
+        </p>
+      </article>
+
+      <article>
+        <h3>
+          Format du cours
+        </h3>
+        <p>
+          1 séance d'introduction, mise en pratique des bases.<br/>
+          4 séances de travail sur le sujet choisi.<br/>
+          1 séance de rendu et de démonstration du projet.<br/>
+        </p>
+      </article>
+      
+      <article>
+        <h3>
+          Java EE
+        </h3>
+        <p>
+          <img src="http://upload.wikimedia.org/wikipedia/commons/e/e1/Java_Platforms.PNG" />
+        </p>
+        <p>
+          Java Enterprise Edition = <br/>
+          Java Standard Edition <br/>
+          + JDK/tools <br/>
+          + Java Specification Requests (EE) 
+        </p>
+      </article>
+
+      <article class='smaller'>
+        <h3>
+          Composants JEE
+        </h3>
+        <div style="float: left; width: 40%">
+          <h4>Web</h4>
+          <ul>
+            <li>Servlet</li>
+            <li>Portlet</li>
+            <li>JSP</li>
+            <li>JSTL</li>
+            <li>JSF</li>
+          </ul>
+        </div>
+        <div style="float: left; width: 40%">
+          <h4>Communication</h4>
+          <ul>
+            <li>JNDI</li>
+            <li>JMS</li>
+            <li>JCA</li>
+            <li>JavaMail</li>
+            <li>JMX</li>
+            <li>JAXM - JAX-RPC - JAXB - JAXR</li>
+            <li>Java RMI - IDL</li>
+          </ul>
+        </div>
+        <div style="float: left; width: 40%">
+          <h4>BDD</h4>
+          <ul>
+            <li>JDBC</li>
+            <li>JPA</li>
+            <li>JTA</li>
+          </ul>
+        </div>
+      </article>
+
+      <article>
+        <h3>
+          Serveur Java EE
+        </h3>
+        <ul>
+          <li>Oracle (sun) GlassFish</li>
+          <li>Oracle WebLogic</li>
+          <li>JBoss</li>
+          <li>IBM WebSphere</li>
+          <li>Apache Geronimo</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>
+          Implémentation de sous-parties (composants)
+        </h3>
+        <ul>
+          <li>Tomcat / Jetty : Servlet</li>
+          <li>Jasper : JSP</li>
+          <li>Hibernate : JPA / JTA</li>
+          <li>...</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>
+          Spring
+        </h3>
+        <q style='font-size: 1.2em'>
+          The Spring Framework provides a comprehensive programming and configuration model
+          for modern Java-based enterprise applications
+        </q>
+        <div class='author'>
+          spring.io
+        </div>
+      </article>
+
+      <article>
+        <h3>
+          Spring projects
+        </h3>
+        <ul class='two-cols'><li>  Spring Boot
+        </li><li> Spring Framework
+        </li><li> Spring XD (cross domain)
+        </li><li> Spring Data
+        </li><li> Spring Integration
+        </li><li> Spring Batch
+        </li><li> Spring Security
+        </li><li> Spring Hateoas
+        </li><li> Spring Social
+        </li><li> Spring AMQP
+        </li><li> Spring Mobile
+        </li><li> Spring For Android
+        </li><li> Spring Web Flow
+        </li><li> Spring Web services
+        </li><li> Spring LDAP
+        </li><li> Grails
+        </li><li> Groovy
+        </li></ul>
+      </article>
+      
+      <article>
+        <h3>
+          Contenu du "cours"
+        </h3>
+        <p>
+          Un ensemble d'exercices de TP permettant de vous mettre le pieds à l'étrier.<br/>
+          Accessible via github: <br/>
+          <a href="https://github.com/gdufrene/java_ee_spring">https://github.com/gdufrene/java_ee_spring</a>
+        </p>
+        <ul><li>  101. Servlet - Jetty
+        </li><li> 102. JSP
+        </li><li> 103. War
+        </li><li> 104. JPA - Hibernate
+        </li><li> 105. Spring (context)
+        </li></ul>
+      </article>
+      
+      <article>
+        <h3>
+          Le projet
+        </h3>
+        <p>
+          Projet "global" : un site portail de jeux de plateau.
+        </p>
+        <ul><li>  Le site portail
+          <ul><li>  Inscription / Connexion
+          </li><li> Liste des jeux
+          </li><li> Liste des membres
+          </li><li> Liste des parties
+          </li><li> Classement des joueurs
+          </li></ul>
+        </li><li> Les jeux
+          <ul><li> Bloom
+          </li><li> Manhattan
+          </li><li> RallyMan
+          </li><li> FactoryFun
+          </li></ul>
+        </li></ul>
+      </article>
+
+      <article class="smaller">
+        <h3>
+          Consignes pour le projet
+        </h3>
+        <p>
+          Créer un compte Github par personne,<br/>
+          Créer un projet et donner les droits à vos contributeurs (collègues).<br/>
+          L'activité sur github doit être représentative de ce que chacun a fait.<br/>
+          De préférence, utilisez maven. La compilation doit être simple.<br/>
+          Doit pouvoir créer un War et le déployer dans Jetty, Tomcat ou autre ...<br/>
+          Ecrivez un README dévrivant : <br>
+          - votre projet en quelques lignes ; <br/>
+          - comment compiler, lancer votre projet. <br/>
+        </p>
+        <p>
+          Prévoir une "démo" du projet (15 minutes)<br/>
+          Lister les principales difficultés et comment elles ont été résolues. (5 minutes)<br/>
+        </p>
+      </article>
+
+      <article>
+        <h2>
+          Merci !
+        </h2>
+      </article>
+
+    </section>
+
+  </body>
+</html>
