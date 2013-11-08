@@ -39,7 +39,7 @@ java version "1.7.0_25"
 Java(TM) SE Runtime Environment (build 1.7.0_25-b15)
 Java HotSpot(TM) 64-Bit Server VM (build 23.25-b01, mixed mode)
 - Au besoin configurer votre shell pour ajouter le chemin de votre SDK dans le PATH
-- Vérifier que le fichier "start.sh" possède les droits d'exécution
+- Vérifier que le fichier "run.sh" possède les droits d'exécution
 - Pour arrêter le serveur : Ctrl+C dans la console
 
 ### Notre première requête au serveur
