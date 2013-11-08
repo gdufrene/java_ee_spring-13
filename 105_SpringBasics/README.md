@@ -80,3 +80,6 @@ l'annotation @ComponentScan sert à définir quel sera la portée des paquetages
 
 Lancer l'application avec Eclipse ou Maven (mvn exec:java)
 
+Je vous recommande évidemment la lecture des chapitre 5.8 et 5.9 de la documentation de Spring :
+http://docs.spring.io/spring/docs/3.2.4.RELEASE/spring-framework-reference/html/
+
