@@ -49,7 +49,9 @@ public class Circonference extends HttpServlet {
 		}
 		
 		resp.setContentType("application/json");
-		resp.getWriter().write( "{ 'circonference': " + d * 2 * Math.PI + " }\n" );
+		// TODO
+		double circ = 0.0;
+		resp.getWriter().write( "{ 'circonference': " + circ + " }\n" );
 	}
 
 }

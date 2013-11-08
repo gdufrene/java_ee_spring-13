@@ -37,9 +37,7 @@ public class FormGreet extends HttpServlet {
 			throws ServletException, IOException {
 		resp.setContentType("text/html");
 		resp.setCharacterEncoding("UTF-8");
-		
-		String name = req.getParameter("name");
-		if ( name == null || name.isEmpty() ) name = "world";
+
 		
 		Writer out = resp.getWriter();
 		out.write("<html>");
@@ -48,7 +46,7 @@ public class FormGreet extends HttpServlet {
 		out.write("</head>");
 		out.write("<body>");
 		
-		out.write("Hello <b>"+name+"</b><br/>");
+		// TODO get parameter name and display "hello name"
 		
 		out.write("</body>");
 		out.write("</html>");
