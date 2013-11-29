@@ -47,7 +47,22 @@
 		<version>3.0.20100224</version>
 		<scope>provided</scope>
 	</dependency>
-    
+
+
+  <dependency>
+      <groupId>com.efsavage.twitter.bootstrap</groupId>
+      <artifactId>bootstrap-maven</artifactId>
+      <version>2.3.1</version>
+  </dependency>
+
+
+  <dependency>
+      <groupId>com.efsavage.jquery</groupId>
+      <artifactId>jquery-maven</artifactId>
+      <version>1.8.2</version>
+  </dependency>
+
+
     <!-- Test dependencies -->
     <dependency>
       <groupId>junit</groupId>
