@@ -61,6 +61,12 @@
       <artifactId>jquery-maven</artifactId>
       <version>1.8.2</version>
   </dependency>
+  
+  <dependency>
+  	<groupId>org.codehaus.jackson</groupId>
+  	<artifactId>jackson-jaxrs</artifactId>
+  	<version>1.9.12</version>
+  </dependency>
 
 
     <!-- Test dependencies -->
@@ -90,6 +96,12 @@
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-annotations</artifactId>
+      <version>9.0.4.v20130625</version>
+      <scope>test</scope>
+    </dependency>
+        <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-deploy</artifactId>
       <version>9.0.4.v20130625</version>
       <scope>test</scope>
     </dependency>
